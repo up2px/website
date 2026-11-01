@@ -23,24 +23,28 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://up2px.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "up2px - Websites & Landing Pages for Early-Stage Startups",
+    default: "up2px - Bespoke Websites & Landing Pages for Businesses",
     template: "%s | up2px",
   },
   description:
-    "up2px designs and builds bespoke marketing sites, catalogs, and online stores for businesses with sub-second speeds, tactile micro-interactions, and direct WhatsApp lead flows.",
+    "up2px designs and builds bespoke websites, catalogs, and online stores for businesses. Engineered for speed, refined with tactile interactions, and built to turn visitors into WhatsApp inquiries.",
   applicationName: "up2px",
   authors: [{ name: "up2px", url: siteUrl }],
   creator: "up2px",
   publisher: "up2px",
   keywords: [
-    "startup website design",
-    "landing page development",
-    "Next.js agency india",
-    "high conversion landing page",
-    "SaaS landing page",
-    "bespoke web development",
-    "WhatsApp checkout store",
-    "fast websites",
+    "bespoke website design",
+    "custom website development",
+    "business website design",
+    "website design agency India",
+    "website development India",
+    "high-performance websites",
+    "custom landing page design",
+    "ecommerce website development",
+    "online catalog development",
+    "WhatsApp lead generation",
+    "conversion-focused web design",
+    "Next.js web development",
     "up2px",
   ],
   alternates: {
@@ -50,9 +54,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    title: "up2px — Websites & Landing Pages for Early-Stage Startups",
+    title: "up2px - Bespoke Websites & Landing Pages for Businesses",
     description:
-      "Bespoke landing pages, catalogs, and online stores for startups. Sub-second load speeds, tactile micro-interactions, and direct WhatsApp lead capture.",
+      "We design and build bespoke websites, catalogs, and online stores. Engineered for speed, enriched with tactile interactions, and built around seamless WhatsApp inquiry flows.",
     siteName: "up2px",
     images: [
       {
@@ -65,9 +69,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "up2px — Websites & Landing Pages for Early-Stage Startups",
+    title: "up2px - Bespoke Websites & Landing Pages for Businesses",
     description:
-      "Bespoke landing pages, catalogs, and online stores for startups with sub-second load speeds and direct WhatsApp flows.",
+      "Custom-built websites for businesses. Fast by engineering, thoughtful by design, and built to turn visitors into WhatsApp inquiries.",
     creator: "@up2px",
     site: "@up2px",
     images: ["/og-image.png"],
@@ -101,7 +105,7 @@ const jsonLd = {
       url: siteUrl,
       name: "up2px",
       description:
-        "Websites and landing pages for early-stage startups and SaaS businesses.",
+        "Bespoke websites, landing pages, catalogs, and online stores designed and built for businesses.",
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -114,7 +118,7 @@ const jsonLd = {
       logo: `${siteUrl}/rect-logo.svg`,
       image: `${siteUrl}/og-image.png`,
       description:
-        "up2px designs and builds bespoke marketing sites, catalogs, and online stores for early-stage startup and SaaS founders.",
+        "up2px is a web design and development studio creating bespoke websites, catalogs, and online stores for businesses. Every website is engineered for speed, enhanced with tactile micro-interactions, and designed to turn visitors into direct WhatsApp inquiries.",
       sameAs: [
         "https://x.com/up2px",
         "https://linkedin.com/company/up2px",
