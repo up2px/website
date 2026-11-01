@@ -1,26 +1,215 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Theme is driven by data-theme or class on <html>; dark is the default. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *, .light, .light *));
+
+:root,
+[data-theme="light"],
+.light {
+  color-scheme: light;
+  --ground: #ffffff;
+  --ink: #0a0a0a;
+  --ink-muted: #56564f;
+  --ink-faint: #8f8f88;
+  --rule: #d7d7d0;
+  --rule-strong: #b6b6ae;
+  --dot: #dcdcd4;
+  --dot-lit: #c9c9c1;
+  --logo-on: #0a0a0a;
+  --logo-off: #d9d9d1;
+  --accent: #FF3B00;
+  --accent-text: #FF3B00;
+  --on-accent: #0a0a0a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-ground: var(--ground);
+  --color-ink: var(--ink);
+  --color-muted: var(--ink-muted);
+  --color-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-dot: var(--dot);
+  --color-dot-lit: var(--dot-lit);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+
+  --font-display: var(--font-doto);
+  --font-inter: var(--font-inter);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+
+  --container-frame: 68.75rem; /* 1100px */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    overflow-x: clip;
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+  }
+
+  body {
+    overflow-x: clip;
+    background-color: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Smooth color transition fallback */
+  body,
+  header,
+  footer,
+  section,
+  .border-rule,
+  .bg-ground,
+  .text-ink,
+  .text-muted,
+  .text-faint,
+  svg path {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  @keyframes gentle-wiggle {
+    0%, 100% {
+      transform: rotate(0deg) scale(1);
+    }
+    15% {
+      transform: rotate(-10deg) scale(1.08);
+    }
+    30% {
+      transform: rotate(10deg) scale(1.08);
+    }
+    45% {
+      transform: rotate(-6deg) scale(1.04);
+    }
+    60% {
+      transform: rotate(6deg) scale(1.04);
+    }
+    75% {
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  .animate-wiggle {
+    animation: gentle-wiggle 2.4s ease-in-out infinite;
+    transform-origin: center center;
+  }
+
+  @keyframes scroll-up {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes scroll-down {
+    from {
+      transform: translateY(-50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-column-up {
+    animation: scroll-up 28s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-column-down {
+    animation: scroll-down 28s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-column-up-slow {
+    animation: scroll-up 38s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-column-down-slow {
+    animation: scroll-down 38s linear infinite;
+    will-change: transform;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  input,
+  textarea {
+    caret-color: var(--accent);
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+  }
+
+  * {
+    scrollbar-color: var(--rule-strong) var(--ground);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* View Transitions API configuration for circular clip-path theme reveal */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+
+
+@utility font-display {
+  font-family: var(--font-doto), ui-monospace, monospace;
+  font-variation-settings: "ROND" var(--rond, 40);
+  font-weight: var(--display-weight, 800);
+  letter-spacing: 0;
+}
+
+@utility font-inter {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Dense dot field used inside the frame for separator bands and media slots. */
+@utility dot-field {
+  background-image: radial-gradient(circle at center, var(--dot-lit) 1px, transparent 1.25px);
+  background-size: 8px 8px;
+  background-position: 4px 4px;
+}
+
+@utility grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, var(--rule) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
 }
